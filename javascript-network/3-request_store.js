@@ -1,7 +1,7 @@
 const request = require('request');
 const fs = require('fs');
 
-// Get the URL and file path from the command line arguments
+// Get the URL and file path from command line arguments
 const url = process.argv[2];
 const filePath = process.argv[3];
 
@@ -10,8 +10,8 @@ request(url, (error, response, body) => {
   if (error) {
     console.error(error.message);
   } else if (response.statusCode === 200) {
-    // Write the response body to the specified file path (UTF-8 encoded)
-    fs.writeFile(filePath, body.trim(), 'utf-8', (writeError) => {
+    // Write the response body to the specified file
+    fs.writeFile(filePath, body, 'utf-8', (writeError) => {
       if (writeError) {
         console.error(writeError.message);
       } else {
