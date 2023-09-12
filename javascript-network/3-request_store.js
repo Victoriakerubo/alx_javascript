@@ -11,7 +11,7 @@ request(url, (error, response, body) => {
     console.error(error.message);
   } else if (response.statusCode === 200) {
     // Write the response body to the specified file path (UTF-8 encoded)
-    fs.writeFile(filePath, body, 'utf-8', (writeError) => {
+    fs.writeFile(filePath, body.trim(), 'utf-8', (writeError) => {
       if (writeError) {
         console.error(writeError.message);
       } else {
