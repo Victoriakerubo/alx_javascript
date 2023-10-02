@@ -149,4 +149,19 @@ function showWelcomeMessageOrForm() {
         // User is not logged in, show the login form
         showForm();
     }
-}
+// Function to set cookies and show the welcome message or form
+function setCookiesAndShowWelcomeMessage() {
+    const firstnameInput = document.getElementById('loginUsername');
+    const emailInput = document.getElementById('loginPassword');
+
+    // Get values from inputs
+    const firstname = firstnameInput.value;
+    const email = emailInput.value;
+
+    // Set cookies using js-cookie
+    Cookies.set('firstname', firstname, { expires: 10 });
+    Cookies.set('email', email, { expires: 10 });
+
+    // Call the function to show the welcome message or form
+    showWelcomeMessageOrForm();
+} 
