@@ -88,3 +88,58 @@ function showCookies() {
     // Append the paragraph at the bottom of the page
     document.getElementById('cookieDisplay').appendChild(paragraph);
 }
+function showForm() {
+    // Remove the welcome message if it exists
+    const welcomeMessage = document.getElementById('welcomeMessage');
+    if (welcomeMessage) {
+        welcomeMessage.remove();
+    }
+
+    // Show the login form
+    const loginForm = document.getElementById('loginForm');
+    loginForm.style.display = 'block';
+}
+function hideForm() {
+    const loginForm = document.getElementById('loginForm');
+    loginForm.style.display = 'none';
+}
+function deleteCookiesAndShowForm() {
+    // Remove the firstname and email cookies
+    document.cookie = 'firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+    // Show the login form
+    showForm();
+}
+function showWelcomeMessageOrForm() {
+    const firstname = getCookie('firstname');
+
+    if (firstname) {
+        // User is logged in, display welcome message
+        const welcomeMessage = document.createElement('h1');
+        welcomeMessage.id = 'welcomeMessage';
+        welcomeMessage.textContent = `Welcome ${firstname} (logout)`;
+
+        // Create a link for logout
+        const logoutLink = document.createElement('a');
+        logoutLink.textContent = 'logout';
+        logoutLink.style.fontWeight = 'normal';
+        logoutLink.style.fontStyle = 'italic';
+        logoutLink.style.marginLeft = '10px';
+        logoutLink.href = '#';
+
+        // Add a click event to the logout link
+        logoutLink.addEventListener('click', function () {
+            deleteCookiesAndShowForm();
+            hideWelcomeMessage();
+        });
+
+        // Append the welcome message and logout link
+        welcomeMessage.appendChild(logoutLink);
+        document.body.innerHTML = '';
+        document.body.appendChild(welcomeMessage);
+    } else {
+        // User is not logged in, show the login form
+        showForm();
+    }
+}
