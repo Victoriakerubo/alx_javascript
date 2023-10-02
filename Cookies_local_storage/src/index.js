@@ -104,13 +104,20 @@ function hideForm() {
     loginForm.style.display = 'none';
 }
 function deleteCookiesAndShowForm() {
-    // Remove the firstname and email cookies
-    document.cookie = 'firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    // Remove the firstname and email cookies using js-cookie
+    Cookies.remove('firstname');
+    Cookies.remove('email');
+    // Show the login form
+    showForm();
+function deleteCookiesAndShowForm() {
+    // Remove the firstname and email cookies using js-cookie
+    Cookies.remove('firstname');
+    Cookies.remove('email');
 
     // Show the login form
     showForm();
 }
+
 function showWelcomeMessageOrForm() {
     const firstname = getCookie('firstname');
 
