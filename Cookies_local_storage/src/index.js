@@ -209,3 +209,27 @@ function displayCart() {
         document.body.appendChild(p);
     }
 }
+function addItemToCart(item) {
+    // Use session storage instead of local storage
+    sessionStorage.setItem(item, "true");
+    displayCart();
+}
+function displayCart() {
+    // Use session storage instead of local storage
+    const cartItemCount = Object.keys(sessionStorage).length;
+
+    if (cartItemCount > 0) {
+        const cartMessage = `You previously had ${cartItemCount} item${cartItemCount > 1 ? "s" : ""} in your cart.`;
+        const p = document.createElement("p");
+        p.textContent = cartMessage;
+
+        // Remove any existing cart message before adding a new one
+        const existingCartMessage = document.querySelector("#cartMessage");
+        if (existingCartMessage) {
+            existingCartMessage.remove();
+        }
+
+        p.id = "cartMessage";
+        document.body.appendChild(p);
+    }
+}
