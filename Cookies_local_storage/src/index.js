@@ -164,4 +164,6 @@ function setCookiesAndShowWelcomeMessage() {
 
     // Call the function to show the welcome message or form
     showWelcomeMessageOrForm();
-} 
+}
+
+
