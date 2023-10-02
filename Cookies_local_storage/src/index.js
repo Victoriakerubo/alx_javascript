@@ -165,5 +165,49 @@ function setCookiesAndShowWelcomeMessage() {
     // Call the function to show the welcome message or form
     showWelcomeMessageOrForm();
 }
+const availableItems = ["Shampoo", "Soap", "Sponge", "Water"];
+if (typeof Storage === "undefined") {
+    alert("Sorry, your browser does not support Web storage. Try again with a better one.");
+} else {
+    // Local storage is supported, proceed with the application
+    createStore();
+    displayCart();
+}
+function addItemToCart(item) {
+    localStorage.setItem(item, "true");
+    displayCart();
+}
+function createStore() {
+    const ul = document.createElement("ul");
+
+    availableItems.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        li.addEventListener("click", () => {
+            addItemToCart(item);
+        });
+        ul.appendChild(li);
+    });
+
+    document.body.appendChild(ul);
+}
+function displayCart() {
+    const cartItemCount = Object.keys(localStorage).length;
+
+    if (cartItemCount > 0) {
+        const cartMessage = `You previously had ${cartItemCount} item${cartItemCount > 1 ? "s" : ""} in your cart.`;
+        const p = document.createElement("p");
+        p.textContent = cartMessage;
+
+        // Remove any existing cart message before adding a new one
+        const existingCartMessage = document.querySelector("#cartMessage");
+        if (existingCartMessage) {
+            existingCartMessage.remove();
+        }
+
+        p.id = "cartMessage";
+        document.body.appendChild(p);
+    }
+}
 
 
