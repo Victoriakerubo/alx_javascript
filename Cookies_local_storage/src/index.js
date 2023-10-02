@@ -62,3 +62,29 @@ function setCookies() {
     firstnameInput.value = '';
     emailInput.value = '';
 }
+// Function to get the value of a specific cookie
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.trim().split('=');
+        if (cookieName === name) {
+            return decodeURIComponent(cookieValue);
+        }
+    }
+    return '';
+}
+// Function to display cookies in a specific format
+function showCookies() {
+    // Get cookie values
+    const firstname = getCookie('firstname');
+    const email = getCookie('email');
+
+    // Create a paragraph element
+    const paragraph = document.createElement('p');
+
+    // Set the inner HTML with the desired format
+    paragraph.innerHTML = `Email: ${email} - Firstname: ${firstname}`;
+
+    // Append the paragraph at the bottom of the page
+    document.getElementById('cookieDisplay').appendChild(paragraph);
+}
