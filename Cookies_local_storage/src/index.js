@@ -209,5 +209,3 @@ function displayCart() {
         document.body.appendChild(p);
     }
 }
-
-
